@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>House Price Prediction</h2>
+    
+    <form id="predictionForm">
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <select class="form-control" id="location" name="location">
+                {% for location in locations %}
+                    <option value="{{ location }}">{{ location }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="total_sqft">Total Square Feet:</label>
+            <input type="number" class="form-control" id="total_sqft" name="total_sqft">
+        </div>
+        <div class="form-group">
+            <label for="bath">Number of Bathrooms:</label>
+            <input type="number" class="form-control" id="bath" name="bath">
+        </div>
+        <div class="form-group">
+            <label for="bhk">Number of Bedrooms (BHK):</label>
+            <input type="number" class="form-control" id="bhk" name="bhk">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="predictPrice()">Predict Price</button>
+    </form>
+    
+    <div class="mt-5">
+        <h4>Predicted Price:</h4>
+        <p id="predictedPrice"></p>
+    </div>
+</div>
+
+<script>
+    // Load locations from JSON file
+    fetch('/static/locations.json')
+        .then(response => response.json())
+        .then(data => {
+            let locations = data.locations;
+            let locationSelect = document.getElementById('location');
+            
+            locations.forEach(location => {
+                let option = document.createElement('option');
+                option.value = location;
+                option.text = location;
+                locationSelect.appendChild(option);
+            });
+        });
+
+    // Function to predict price
+    function predictPrice() {
+        let form = document.getElementById('predictionForm');
+        let formData = new FormData(form);
+
+        fetch('/predict', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('predictedPrice').innerText = `₹ ${data.prediction.toFixed(2)}`;
+        });
+    }
+</script>
+
+</body>
+</html>

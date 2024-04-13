@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            max-width: 600px;
+        }
+
+        img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="/static/logo.jpeg" alt="House Price Prediction Logo" class="mx-auto d-block">
+    <h2>House Price Prediction</h2>
+    
+    <form id="predictionForm">
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <select class="form-control" id="location" name="location">
+                {% for location in locations %}
+                    <option value="{{ location }}">{{ location }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="total_sqft">Total Square Feet:</label>
+            <input type="number" class="form-control" id="total_sqft" name="total_sqft" required>
+        </div>
+        <div class="form-group">
+            <label for="bath">Number of Bathrooms:</label>
+            <input type="number" class="form-control" id="bath" name="bath" required>
+        </div>
+        <div class="form-group">
+            <label for="bhk">Number of Bedrooms (BHK):</label>
+            <input type="number" class="form-control" id="bhk" name="bhk" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="predictPrice()">Predict Price</button>
+    </form>
+    
+    <div class="mt-5">
+        <h4>Predicted Price:</h4>
+        <p id="predictedPrice"></p>
+    </div>
+</div>
+
+<script>
+    // Load locations from JSON file
+    fetch('/static/locations.json')
+        .then(response => response.json())
+        .then(data => {
+            let locations = data.locations;
+            let locationSelect = document.getElementById('location');
+            
+            locations.forEach(location => {
+                let option = document.createElement('option');
+                option.value = location;
+                option.text = location;
+                locationSelect.appendChild(option);
+            });
+        });
+
+    // Function to predict price
+    function predictPrice() {
+        let form = document.getElementById('predictionForm');
+        let formData = new FormData(form);
+
+        fetch('/predict', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('predictedPrice').innerText = `₹ ${data.prediction.toFixed(2)} lakhs`;
+        });
+    }
+</script>
+
+</body>
+</html>
