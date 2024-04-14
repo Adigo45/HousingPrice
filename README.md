@@ -18,6 +18,19 @@ a beautiful webpage interface using HTML for user interaction.
 - ### Frontend
   HTML
 
+## File Structure
+customer-churn-prediction/
+app.py
+static/
+  locations.json
+templates/
+  form.html
+  result.html
+HousingPrice_Prediction.pkl
+README.md
+requirements.txt
+
+
 ## Installation
 ### Prerequisites
 - Python 3.11.5
