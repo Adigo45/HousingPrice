@@ -41,4 +41,4 @@ def predict():
 
 if __name__ == "__main__":
     print("Starting Flask Server For House Price Prediction")
-    app.run(debug=True)
+    app.run(debug = True)
