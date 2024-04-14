@@ -56,17 +56,24 @@ requirements.txt
 
 ## Steps
 - #### Clone the repository
+  ```terminal
   git clone https://github.com/Adigo45/HousingPrice
+  ```
 - #### Navigate to the project directory
+  ```terminal
   cd Housing
+  ```
 - #### Install required packages
+  ```terminal
   pip install -r requirements.txt
-
+  ```
 
 
 ## Usage
 - ### Run the Flask app
+  ```anaconda
   python app.py
+  ```
 - ### Open your browser and go to
   http://localhost:5000/
 - ### Enter the required details
