@@ -1,6 +1,6 @@
-flask
+Flask==2.2.2
 numpy
-sklearn
+scikit-learn
 matplotlib
 pandas
 imbalanced-learn
