@@ -11,9 +11,10 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-## Expose port 80
-EXPOSE 80
+## Expose port 8000
+EXPOSE 8000
 
 #Run app.py when the container launches
 
-CMD ["flask", "run", "--host=0.0.0.0", '--port=80']
+CMD ["gunicorn", "-w", "4", "app:app", "-b", "0.0.0.0:8000"]
+
