@@ -70,6 +70,13 @@ requirements.txt
 
 
 ## Usage
+
+1. ### Directly pull the image from the dockerhub to test
+   ```
+   docker pull aditya453/price-prediction-app:latest
+   ```
+   ### OR
+   
 - ### Run the Flask app
   ```anaconda
   python app.py
