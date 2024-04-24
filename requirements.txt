@@ -4,3 +4,4 @@ scikit-learn
 matplotlib
 pandas
 imbalanced-learn
+gunicorn==20.1.0
