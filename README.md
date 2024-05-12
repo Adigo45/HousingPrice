@@ -9,7 +9,7 @@ a beautiful webpage interface using HTML for user interaction.
 
 
 - ### Predict Housing Prices:
-  Input features like location, total area in square feets, number of bathrooms (bath), total number of bedrooms (bhk) are used from the user input to get the predicted price
+  Input features like location, total area in square feets, number of bathrooms (bath), total num. of bedrooms (bhk) are used from the user input to get the predicted price
 - A beautiful HTML form is created to take the input from the user to predict the price of the house.
   ![Screenshot 2024-04-14 at 16 11 47](https://github.com/Adigo45/HousingPrice/assets/86388354/21212680-6fa0-412e-8714-0a28b3369915)
 
